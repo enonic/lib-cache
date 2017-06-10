@@ -1,0 +1,61 @@
+= Cache Library
+
+image::https://img.shields.io/badge/xp-6.+-blue.svg[role="right"]
+
+This library is used for basic caching of resources in memory. It will automatically evict old
+entries when the cache is full. To start using this library, put the following into your `build.gradle`
+file:
+
+[source,groovy]
+----
+dependencies {
+  include 'com.enonic.lib:lib-cache:1.+'
+}
+----
+
+== Usage
+
+To use this library in your JavaScript code, you first need to require it:
+
+[source,js]
+----
+var cacheLib = require('/lib/cache');
+----
+
+Then you will need to create a new cache with some settings. You can create multiple caches in your
+application.
+
+[source,js]
+----
+var cache = cacheLib.newCache({
+    size:   100,     <1>
+    expire: 60*60    <2>
+});
+----
+<1> Maximum number of items in the cache before it will evict.
+<2> Number of seconds the items will be in the cache before it's evicted.
+
+From here on you can now use the cache functions on the cache. To get (or populate if not exists)
+you can do it like this:
+
+[source,js]
+----
+var item = cache.get('my-key', function() {     <1>
+    return fetchSomethingHeavy();               <2>
+});
+----
+<1> Get function will either get the item if exists, or call the function to populate the cache.
+<2> Here you will do the actual population of the cache entry.
+
+
+== API
+
+Here's the API methods that is defined in this library.
+
+=== `newCache`
+
+=== `Cache.get`
+
+=== `Cache.clear`
+
+=== `Cache.getSize`

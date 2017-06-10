@@ -1,3 +1,8 @@
+plugins {
+    id "org.ajoberstar.github-pages" version "1.4.2"
+    id "org.asciidoctor.convert" version "1.5.3"
+}
+
 apply plugin: 'java'
 apply plugin: 'jacoco'
 apply plugin: 'maven-publish'
@@ -35,4 +40,23 @@ publishing {
             url 'http://repo.enonic.net/artifactory/public'
         }
     }
+}
+
+asciidoctor {
+    sourceDir = file( 'docs' )
+    outputDir = buildDir
+    backends = ['html5']
+    attributes = [docinfo1               : '',
+                  docinfodir             : '.',
+                  icons                  : 'font',
+                  sectanchors            : true,
+                  sectlinks              : true,
+                  linkattrs              : true,
+                  encoding               : 'utf-8',
+                  idprefix               : '',
+                  toc                    : 'right',
+                  toclevels              : 1,
+                  nofooter               : '',
+                  'source-highlighter'   : 'coderay',
+                  'coderay-linenums-mode': 'table']
 }
