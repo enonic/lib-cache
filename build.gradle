@@ -55,7 +55,7 @@ asciidoctor {
                   encoding               : 'utf-8',
                   idprefix               : '',
                   toc                    : 'right',
-                  toclevels              : 1,
+                  toclevels              : 2,
                   nofooter               : '',
                   'source-highlighter'   : 'coderay',
                   'coderay-linenums-mode': 'table']
