@@ -60,3 +60,12 @@ asciidoctor {
                   'source-highlighter'   : 'coderay',
                   'coderay-linenums-mode': 'table']
 }
+
+githubPages {
+    repoUri = "git@github.com:enonic/lib-cache.git"
+    pages {
+        from "${asciidoctor.outputDir}/html5"
+    }
+}
+
+prepareGhPages.dependsOn += asciidoctor
