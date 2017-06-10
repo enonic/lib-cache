@@ -6,4 +6,4 @@ Cache Library for Enonic XP
 [![License](https://img.shields.io/github/license/enonic/lib-cache.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 
-Docs here: https://enonic.github.io/lib-cache
+Docs here: https://enonic.github.io/lib-cache/
