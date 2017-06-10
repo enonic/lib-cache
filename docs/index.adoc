@@ -29,7 +29,7 @@ application.
 ----
 var cache = cacheLib.newCache({
     size:   100,     <1>
-    expire: 60*60    <2>
+    expire: 3600     <2>
 });
 ----
 <1> Maximum number of items in the cache before it will evict.
