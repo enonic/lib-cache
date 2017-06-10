@@ -1,5 +1,5 @@
 var assert = require('/lib/xp/assert');
-var cacheLib = require('/lib/xp/cache');
+var cacheLib = require('/lib/cache');
 
 exports.testCache = function () {
 
@@ -40,6 +40,6 @@ exports.testCache = function () {
 
 };
 
-exports.testExamples = function () {
-    testInstance.runScript('/site/lib/xp/examples/cache/newCache.js');
+exports.testCompatibility = function () {
+    assert.assertTrue(cacheLib === require('/lib/xp/cache'));
 };

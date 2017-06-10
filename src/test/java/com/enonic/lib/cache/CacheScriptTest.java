@@ -1,4 +1,4 @@
-package com.enonic.xp.lib.cache;
+package com.enonic.lib.cache;
 
 import com.enonic.xp.testing.script.ScriptRunnerSupport;
 
@@ -8,6 +8,6 @@ public class CacheScriptTest
     @Override
     public String getScriptTestFile()
     {
-        return "/site/test/cache-test.js";
+        return "/test/cache-test.js";
     }
 }

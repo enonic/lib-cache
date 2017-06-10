@@ -1,4 +1,4 @@
-package com.enonic.xp.lib.cache;
+package com.enonic.lib.cache;
 
 import java.util.concurrent.Callable;
 
