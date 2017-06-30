@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'jacoco'
     id 'maven'
-    id 'com.enonic.xp.doc' version '1.0.0'
+    id 'com.enonic.xp.doc' version '1.0.2'
 }
 
 repositories {
