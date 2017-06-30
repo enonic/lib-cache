@@ -1,32 +1,13 @@
-buildscript {
-    repositories {
-        mavenLocal()
-        jcenter()
-        maven {
-            url 'https://repo.enonic.com/public'
-        }
-    }
-
-    dependencies {
-        classpath 'com.enonic.gradle:gradle-defaults:1.0.1'
-    }
-}
-
 plugins {
-    id "org.ajoberstar.github-pages" version "1.4.2"
-    id "org.asciidoctor.convert" version "1.5.3"
+    id 'java'
+    id 'jacoco'
+    id 'maven'
+    id 'com.enonic.xp.doc' version '1.0.0'
 }
-
-apply plugin: 'com.enonic.defaults'
-apply plugin: 'java'
-apply plugin: 'jacoco'
-apply plugin: 'maven'
 
 repositories {
     jcenter()
-    maven {
-        url 'http://repo.enonic.com/public'
-    }
+    xp.enonicRepo()
 }
 
 dependencies {
@@ -43,31 +24,3 @@ jacocoTestReport {
 }
 
 check.dependsOn jacocoTestReport
-
-asciidoctor {
-    sourceDir = file( 'docs' )
-    outputDir = buildDir
-    backends = ['html5']
-    attributes = [docinfo1               : '',
-                  docinfodir             : '.',
-                  icons                  : 'font',
-                  sectanchors            : true,
-                  sectlinks              : true,
-                  linkattrs              : true,
-                  encoding               : 'utf-8',
-                  idprefix               : '',
-                  toc                    : 'right',
-                  toclevels              : 2,
-                  nofooter               : '',
-                  'source-highlighter'   : 'coderay',
-                  'coderay-linenums-mode': 'table']
-}
-
-githubPages {
-    repoUri = "git@github.com:enonic/lib-cache.git"
-    pages {
-        from "${asciidoctor.outputDir}/html5"
-    }
-}
-
-prepareGhPages.dependsOn += asciidoctor
