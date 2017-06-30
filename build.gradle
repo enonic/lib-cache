@@ -24,3 +24,7 @@ jacocoTestReport {
 }
 
 check.dependsOn jacocoTestReport
+
+artifacts {
+  archives jar
+}
