@@ -9,7 +9,7 @@ file:
 [source,groovy]
 ----
 dependencies {
-  include 'com.enonic.lib:lib-cache:1.+'
+  include 'com.enonic.lib:lib-cache:1.0.0'
 }
 ----
 
