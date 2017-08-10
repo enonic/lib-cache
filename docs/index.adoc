@@ -116,7 +116,43 @@ var size = cache.getSize();
 ----
 
 
+=== `Cache.remove`
+
+Removes an entry, identified by its key, from the cache.
+If the key is not found in the cache, no changes are made.
+
+*Parameter*
+
+* `key` (_string_) Cache key to remove.
+
+*Examples*
+
+[source,js]
+----
+cache.remove('my-key');
+----
+
+
+=== `Cache.removePattern`
+
+Removes multiple entries, identified by a regular expression, from the cache.
+If the regex pattern does not match with any existing key, no changes are made.
+
+*Parameter*
+
+* `keyRegex` (_string_) Regular expression pattern to match with keys to be removed.
+
+*Examples*
+
+[source,js]
+----
+cache.removePattern('product.*');
+----
+
+
 == Compatibility
 
-This library is also a drop-in replacement for the library in Enonic XP release before 6.11.0. It can be used directly since
+This library is also a drop-in replacement for the library in Enonic XP released before 6.11.0. It can be used directly since
 it will work by using `/lib/cache`, `/lib/xp/cache` and `/site/lib/xp/cache`.
+
+The `remove` and `removePattern` functions are only available since version *1.1.0*

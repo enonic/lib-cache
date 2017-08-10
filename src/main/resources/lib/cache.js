@@ -47,6 +47,28 @@ Cache.prototype.getSize = function () {
 };
 
 /**
+ * Removes an entry, identified by its key, from the cache.
+ *
+ * If the key is not found in the cache, no changes are made.
+ *
+ * @param {string} key Cache key to remove.
+ */
+Cache.prototype.remove = function (key) {
+    return this.cache.remove(key);
+};
+
+/**
+ * Removes multiple entries, identified by a regular expression, from the cache.
+ *
+ * If the regex pattern does not match with any existing key, no changes are made.
+ *
+ * @param {string} keyRegex Regular expression pattern to match with keys to be removed.
+ */
+Cache.prototype.removePattern = function (keyRegex) {
+    return this.cache.removePattern(keyRegex);
+};
+
+/**
  * Creates a new cache.
  *
  * @example-ref examples/cache/newCache.js
