@@ -25,7 +25,7 @@ var cacheLib = require('/lib/cache');
 Then you will need to create a new cache with some settings. You can create multiple caches in your
 application.
 
-WARNING: With the way XP triggers your controller, the new cache needs to be created *outside* the scope of any exported request handler.
+WARNING: With the way XP triggers your controller, the new cache needs to be created *outside* the scope of any exported request handler. If it is created inside, for example, `exports.get()`, you will only create a temporary cache on each request.
 
 [source,js]
 ----
