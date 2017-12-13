@@ -9,13 +9,13 @@ file:
 [source,groovy]
 ----
 dependencies {
-  include 'com.enonic.lib:lib-cache:1.0.0'
+  include 'com.enonic.lib:lib-cache:1.1.0'
 }
 ----
 
 == Usage
 
-To use this library in your JavaScript code, you first need to require it:
+To use this library in your JavaScript code, you first need to require it in your *controller*:
 
 [source,js]
 ----
@@ -25,6 +25,8 @@ var cacheLib = require('/lib/cache');
 Then you will need to create a new cache with some settings. You can create multiple caches in your
 application.
 
+WARNING: With the way XP triggers your controller, the new cache needs to be created *outside* the scope of any exported request handler.
+
 [source,js]
 ----
 var cache = cacheLib.newCache({
@@ -32,11 +34,11 @@ var cache = cacheLib.newCache({
     expire: 3600     <2>
 });
 ----
-<1> Maximum number of items in the cache before it will evict.
+<1> Maximum number of items in the cache before it will evict the oldest.
 <2> Number of seconds the items will be in the cache before it's evicted.
 
-From here on you can now use the cache functions on the cache. To get (or populate if not exists)
-you can do it like this:
+From here on you can now use the cache functions on the cache. To get (or populate if not exists) items
+you can do like this:
 
 [source,js]
 ----
