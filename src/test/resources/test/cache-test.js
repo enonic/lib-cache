@@ -1,4 +1,4 @@
-var assert = require('/lib/xp/assert');
+var assert = require('/lib/xp/testing');
 var cacheLib = require('/lib/cache');
 
 exports.testCache = function () {
@@ -38,10 +38,6 @@ exports.testCache = function () {
     cache.clear();
     assert.assertEquals(0, cache.getSize());
 
-};
-
-exports.testCompatibility = function () {
-    assert.assertTrue(cacheLib === require('/lib/xp/cache'));
 };
 
 exports.testRemove = function () {

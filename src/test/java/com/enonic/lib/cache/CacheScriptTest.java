@@ -1,6 +1,6 @@
 package com.enonic.lib.cache;
 
-import com.enonic.xp.testing.script.ScriptRunnerSupport;
+import com.enonic.xp.testing.ScriptRunnerSupport;
 
 public class CacheScriptTest
     extends ScriptRunnerSupport

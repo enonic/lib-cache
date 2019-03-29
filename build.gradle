@@ -1,14 +1,15 @@
 plugins {
     id 'java'
     id 'jacoco'
-    id 'maven'
-    id 'com.enonic.defaults' version '1.0.3'
-    id 'com.enonic.xp.doc' version '1.0.7'
+    id 'maven-publish'
+    id 'com.enonic.defaults' version '2.0.1'
 }
 
 repositories {
     jcenter()
-    xp.enonicRepo()
+    maven {
+        url 'http://repo.enonic.com/public'
+    }
 }
 
 dependencies {
