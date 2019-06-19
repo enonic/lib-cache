@@ -40,6 +40,44 @@ exports.testCache = function () {
 
 };
 
+exports.testUpdate = function () {
+
+    var cache = cacheLib.newCache({
+        size: 100,
+        expire: 10
+    });
+
+    assert.assertEquals(0, cache.getSize());
+
+    var callback = function () {
+        return {
+            value: 'value'
+        };
+    };
+    var newCallback = function () {
+
+        return {
+            value: 'new value'
+        };
+    };
+
+    var result = cache.get('key1', callback);
+    assert.assertEquals('value', result.value);
+    assert.assertEquals(1, cache.getSize());
+
+    result = cache.update('key1', newCallback);
+    assert.assertEquals('new value', result.value);
+    assert.assertEquals(1, cache.getSize());
+
+    result = cache.update('key2', newCallback);
+    assert.assertEquals('new value', result.value);
+    assert.assertEquals(2, cache.getSize());
+
+    cache.clear();
+    assert.assertEquals(0, cache.getSize());
+
+};
+
 exports.testRemove = function () {
 
     var cache = cacheLib.newCache({

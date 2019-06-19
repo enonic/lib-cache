@@ -21,6 +21,14 @@ public final class CacheBean
         return this.cache.get( key, callback );
     }
 
+    public Object update( final String key, final Callable<Object> callback )
+        throws Exception
+    {
+        remove( key );
+
+        return get( key, callback );
+    }
+
     public void clear()
     {
         this.cache.invalidateAll();
