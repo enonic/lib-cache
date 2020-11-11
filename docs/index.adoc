@@ -1,7 +1,5 @@
 = Cache Library
 
-image::https://img.shields.io/badge/xp-6.+-blue.svg[role="right"]
-
 This library is used for basic caching of resources in memory. It will automatically evict old
 entries when the cache is full. To start using this library, put the following into your `build.gradle`
 file:
@@ -9,7 +7,7 @@ file:
 [source,groovy]
 ----
 dependencies {
-  include 'com.enonic.lib:lib-cache:1.1.0'
+  include 'com.enonic.lib:lib-cache:2.1.0'
 }
 ----
 
