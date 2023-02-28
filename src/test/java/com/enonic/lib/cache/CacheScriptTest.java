@@ -1,4 +1,6 @@
 package com.enonic.lib.cache;
+import java.beans.Transient;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -23,6 +25,18 @@ public class CacheScriptTest
     public void testCache()
     {
         runFunction( "/test/cache-test.js", "testCache" );
+    }
+
+    @Test
+    public void testGetIfPresent()
+    {
+        runFunction( "/test/cache-test.js", "testGetIfPresent" );
+    }
+
+    @Test
+    public void testPut()
+    {
+        runFunction( "/test/cache-test.js", "testPut");
     }
 
     @Test

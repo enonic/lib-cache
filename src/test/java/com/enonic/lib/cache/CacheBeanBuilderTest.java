@@ -21,5 +21,9 @@ public class CacheBeanBuilderTest
 
         bean.clear();
         assertEquals( 0, bean.getSize() );
+
+        bean.put( "key2", "value2" );
+        final Object value2 = bean.get( "key2", () -> "notValue2" );
+        assertEquals( "value2", value2);
     }
 }

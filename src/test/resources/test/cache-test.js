@@ -1,4 +1,4 @@
-var t = require('/lib/xp/testing.js');
+var assert = require('/lib/xp/testing');
 var cacheLib = require('/lib/cache');
 
 exports.testCache = function () {
@@ -8,7 +8,7 @@ exports.testCache = function () {
         expire: 10
     });
 
-    t.assertEquals(0, cache.getSize());
+    assert.assertEquals(0, cache.getSize());
 
     var numCalled = 0;
     var calcFunction = function () {
@@ -21,24 +21,48 @@ exports.testCache = function () {
     };
 
     var result = cache.get('key1', calcFunction);
-    t.assertEquals(1, result.num);
-    t.assertEquals('value1', result.name);
-    t.assertEquals(1, cache.getSize());
+    assert.assertEquals(1, result.num);
+    assert.assertEquals('value1', result.name);
+    assert.assertEquals(1, cache.getSize());
 
     result = cache.get('key1', calcFunction);
-    t.assertEquals(1, result.num);
-    t.assertEquals('value1', result.name);
-    t.assertEquals(1, cache.getSize());
+    assert.assertEquals(1, result.num);
+    assert.assertEquals('value1', result.name);
+    assert.assertEquals(1, cache.getSize());
 
     result = cache.get('key2', calcFunction);
-    t.assertEquals(2, result.num);
-    t.assertEquals('value2', result.name);
-    t.assertEquals(2, cache.getSize());
+    assert.assertEquals(2, result.num);
+    assert.assertEquals('value2', result.name);
+    assert.assertEquals(2, cache.getSize());
 
     cache.clear();
-    t.assertEquals(0, cache.getSize());
+    assert.assertEquals(0, cache.getSize());
 
 };
+
+exports.testGetIfPresent = function(){
+    var cache = cacheLib.newCache({
+        size: 100,
+        expire: 10
+    });
+    assert.assertEquals(null, cache.getIfPresent('key1'));
+};
+
+exports.testPut = function(){
+
+    var cache = cacheLib.newCache({
+        size: 100,
+        expire: 10
+    });
+
+    cache.put('key1', 5);
+
+    var getKey1 = cache.get('key1', function(){
+        return 4;
+    });
+
+    assert.assertEquals(5, getKey1);
+}
 
 exports.testRemove = function () {
 
@@ -47,7 +71,7 @@ exports.testRemove = function () {
         expire: 10
     });
 
-    t.assertEquals(0, cache.getSize());
+    assert.assertEquals(0, cache.getSize());
 
     var numCalled = 0;
     var calcFunction = function () {
@@ -60,12 +84,12 @@ exports.testRemove = function () {
     };
 
     var result = cache.get('key1', calcFunction);
-    t.assertEquals(1, result.num);
-    t.assertEquals('value1', result.name);
-    t.assertEquals(1, cache.getSize());
+    assert.assertEquals(1, result.num);
+    assert.assertEquals('value1', result.name);
+    assert.assertEquals(1, cache.getSize());
 
     cache.remove('key1');
-    t.assertEquals(0, cache.getSize());
+    assert.assertEquals(0, cache.getSize());
 };
 
 exports.testRemovePattern = function () {
@@ -75,7 +99,7 @@ exports.testRemovePattern = function () {
         expire: 10
     });
 
-    t.assertEquals(0, cache.getSize());
+    assert.assertEquals(0, cache.getSize());
 
     var numCalled = 0;
     var calcFunction = function () {
@@ -93,8 +117,8 @@ exports.testRemovePattern = function () {
     cache.get('k1', calcFunction);
     cache.get('k2', calcFunction);
 
-    t.assertEquals(5, cache.getSize());
+    assert.assertEquals(5, cache.getSize());
 
     cache.removePattern('key.*');
-    t.assertEquals(2, cache.getSize());
+    assert.assertEquals(2, cache.getSize());
 };
