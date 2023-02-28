@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'jacoco'
     id 'maven-publish'
     id 'com.enonic.xp.base' version '3.2.0'
     id 'com.enonic.defaults' version '2.1.2'
@@ -12,20 +11,23 @@ repositories {
 }
 
 dependencies {
-    compile "com.enonic.xp:script-api:${xpVersion}"
-    testCompile 'junit:junit:4.13.2'
-    testCompile "com.enonic.xp:testing:${xpVersion}"
+    compileOnly "com.enonic.xp:script-api:${xpVersion}"
+    testImplementation "com.enonic.xp:testing:${xpVersion}"
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.1.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
 }
 
-jacocoTestReport {
-    reports {
-        xml.enabled = true
-        html.enabled = true
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = "${group}"
+            artifactId = "${projectName}"
+            version = "${version}"
+            from components.java
+        }
     }
 }
 
-check.dependsOn jacocoTestReport
-
-artifacts {
-    archives jar
+test {
+    useJUnitPlatform()
 }
