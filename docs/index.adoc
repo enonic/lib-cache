@@ -92,6 +92,39 @@ var item = cache.get('my-key', function() {
 ----
 
 
+=== `Cache.getIfPresent`
+
+This function will get the named item from cache if its set, otherwise it returns null.
+
+*Parameters*
+
+* `key` (_string_) Cache key to get.
+
+*Examples*
+
+[source,js]
+----
+var item = cache.getIfPresent('my-key');
+----
+
+
+=== `Cache.put`
+
+This function will store the provided value for the named key in the cache, regardless if its previously set or not.
+
+*Parameters*
+
+* `key` (_string_) Cache key to update.
+* `value` (_object_) Value to store in the cache.
+
+*Examples*
+
+[source,js]
+----
+cache.put('my-key' , 'my-value');
+----
+
+
 === `Cache.clear`
 
 This will clear all entries from the cache.
@@ -156,3 +189,5 @@ This library is also a drop-in replacement for the library in Enonic XP released
 it will work by using `/lib/cache`, `/lib/xp/cache` and `/site/lib/xp/cache`.
 
 The `remove` and `removePattern` functions are only available since version *1.1.0*
+
+The `getIfPresent` and `put` functions are only available since version *2.3.0*
