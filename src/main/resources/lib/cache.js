@@ -31,6 +31,27 @@ Cache.prototype.get = function (key, callback) {
 };
 
 /**
+ * Returns value for cache entry if exists, otherwise it returns null.
+ *
+ * @param {string} key Cache key to use.
+ * @returns {*} Cache value for key.
+ */
+Cache.prototype.getIfPresent = function (key) {
+    var result = this.cache.getIfPresent(key);
+    return __.toNativeObject(result);
+};
+
+/**
+ * Puts the value into the cache with the provided key
+ * 
+ * @param {string} key Cache key to use.
+ * @param {Object} value Value to store in the cache.
+ */
+Cache.prototype.put = function (key, value){
+    this.cache.put(key, value);
+}
+
+/**
  * Clears the cache.
  */
 Cache.prototype.clear = function () {

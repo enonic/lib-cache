@@ -21,6 +21,18 @@ public final class CacheBean
         return this.cache.get( key, callback );
     }
 
+    public Object getIfPresent( final String key )
+        throws Exception
+    {
+        return this.cache.getIfPresent( key );
+    }
+
+    public void put(final String key, final Object value)
+        throws Exception
+    {
+        this.cache.put( key, value );
+    }
+
     public void clear()
     {
         this.cache.invalidateAll();

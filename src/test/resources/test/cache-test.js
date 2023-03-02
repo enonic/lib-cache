@@ -40,6 +40,30 @@ exports.testCache = function () {
 
 };
 
+exports.testGetIfPresent = function(){
+    var cache = cacheLib.newCache({
+        size: 100,
+        expire: 10
+    });
+    assert.assertEquals(null, cache.getIfPresent('key1'));
+};
+
+exports.testPut = function(){
+
+    var cache = cacheLib.newCache({
+        size: 100,
+        expire: 10
+    });
+
+    cache.put('key1', 5);
+
+    var getKey1 = cache.get('key1', function(){
+        return 4;
+    });
+
+    assert.assertEquals(5, getKey1);
+}
+
 exports.testRemove = function () {
 
     var cache = cacheLib.newCache({
