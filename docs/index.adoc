@@ -28,8 +28,8 @@ WARNING: With the way XP triggers your controller, the new cache needs to be cre
 [source,js]
 ----
 var cache = cacheLib.newCache({
-    size:   100,     <1>
-    expire: 3600     <2>
+    size:   100,     // <1>
+    expire: 3600     // <2>
 });
 ----
 <1> Maximum number of items in the cache before it will evict the oldest.
@@ -40,8 +40,8 @@ you can do like this:
 
 [source,js]
 ----
-var item = cache.get('my-key', function() {     <1>
-    return fetchSomethingHeavy();               <2>
+var item = cache.get('my-key', function() {     // <1>
+    return fetchSomethingHeavy();               // <2>
 });
 ----
 <1> Get function will either get the item if exists, or call the function to populate the cache.
