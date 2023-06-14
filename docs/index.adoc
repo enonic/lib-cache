@@ -60,7 +60,7 @@ This will create a new cache instance.
 
 * `config` (_object_) Configuration for the cache.
 ** `size` (_number_) Size of the cache (in number of items).
-** `expire` (_number_) Expire time in number of seconds.
+** `expire` (_number_)  If set, each item will be automatically purged from the cache after a set period, in seconds, has elapsed since the item's initial creation, or the most recent update of its value.
 
 *Examples*
 
