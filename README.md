@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/github/license/enonic/lib-cache.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 This library implements simple caching methods that can be used in your apps. See documentation
-here: https://developer.enonic.com/docs/cache-library/master
+here: https://developer.enonic.com/docs/cache-library/
 
 
 ## Building
