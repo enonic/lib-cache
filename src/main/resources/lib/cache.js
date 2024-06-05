@@ -43,7 +43,7 @@ Cache.prototype.getIfPresent = function (key) {
 
 /**
  * Puts the value into the cache with the provided key
- * 
+ *
  * @param {string} key Cache key to use.
  * @param {Object} value Value to store in the cache.
  */
@@ -101,16 +101,16 @@ Cache.prototype.removePattern = function (keyRegex) {
  * @returns {Cache} Returns a new cache instance.
  */
 exports.newCache = function (options) {
-    var builder = __.newBean('com.enonic.lib.cache.CacheBeanBuilder');
+    const builder = __.newBean('com.enonic.lib.cache.CacheBeanBuilder');
 
     if (options.size) {
-        builder.size = options.size;
+        builder.setSize(options.size);
     }
 
     if (options.expire) {
-        builder.expire = options.expire;
+        builder.setExpire(options.expire);
     }
 
-    var cache = builder.build();
+    const cache = builder.build();
     return new Cache(cache);
 };
