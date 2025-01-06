@@ -14,7 +14,7 @@ repositories {
 dependencies {
     compileOnly "com.enonic.xp:script-api:${xpVersion}"
     testImplementation "com.enonic.xp:testing:${xpVersion}"
-    testImplementation 'org.mockito:mockito-junit-jupiter:5.14.2'
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.15.2'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
 }
 
