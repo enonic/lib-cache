@@ -15,7 +15,7 @@ dependencies {
     compileOnly "com.enonic.xp:script-api:${xpVersion}"
     testImplementation "com.enonic.xp:testing:${xpVersion}"
     testImplementation 'org.mockito:mockito-junit-jupiter:5.15.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.12.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.13.2'
 }
 
 jacocoTestReport {
