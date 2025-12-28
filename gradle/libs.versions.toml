@@ -1,0 +1,23 @@
+[versions]
+
+junit = "5.14.1"
+mockito = "5.21.0"
+assertj = "3.27.6"
+enonicDefaults = "2.1.6"
+xpBase = "3.6.2"
+
+[libraries]
+
+junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
+junit-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+
+mockito-bom = { module = "org.mockito:mockito-bom", version.ref = "mockito" }
+mockito-core = { module = "org.mockito:mockito-core" }
+mockito-jupiter = { module = "org.mockito:mockito-junit-jupiter" }
+
+assertj-core = { module = "org.assertj:assertj-core", version.ref = "assertj" }
+
+[plugins]
+enonic-defaults = { id = "com.enonic.defaults", version.ref = "enonicDefaults" }
+enonic-xp-base = { id = "com.enonic.xp.base", version.ref = "xpBase" }

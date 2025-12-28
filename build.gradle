@@ -2,8 +2,8 @@ plugins {
     id 'java'
     id 'jacoco'
     id 'maven-publish'
-    id 'com.enonic.xp.base' version '3.6.2'
-    id 'com.enonic.defaults' version '2.1.6'
+    alias(libs.plugins.enonic.defaults)
+    alias(libs.plugins.enonic.xp.base)
 }
 
 repositories {
@@ -14,8 +14,15 @@ repositories {
 dependencies {
     compileOnly "com.enonic.xp:script-api:${xpVersion}"
     testImplementation "com.enonic.xp:testing:${xpVersion}"
-    testImplementation 'org.mockito:mockito-junit-jupiter:5.15.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.12.0'
+
+    testImplementation platform(libs.junit.bom)
+    testImplementation libs.junit.jupiter
+    testRuntimeOnly  libs.junit.launcher
+
+    testImplementation platform(libs.mockito.bom)
+    testImplementation libs.mockito.core
+    testImplementation libs.mockito.jupiter
+    testImplementation libs.assertj.core
 }
 
 jacocoTestReport {
