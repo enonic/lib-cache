@@ -47,6 +47,39 @@ var item = cache.get('my-key', function() {     // <1>
 <1> Get function will either get the item if exists, or call the function to populate the cache.
 <2> Here you will do the actual population of the cache entry.
 
+IMPORTANT: *Object References and Immutability* - Objects stored in the cache are returned by reference, not by value. This means that if you modify a retrieved object, those modifications will affect the cached object itself. If immutability is required, you must deep clone the returned object. For simple objects, you can use `JSON.parse(JSON.stringify(obj))`. For more complex objects with functions or circular references, consider using a dedicated deep cloning library.
+
+.Example: Reference behavior
+[source,js]
+----
+// Problem: Modifying cached objects
+var obj = cache.get('myObject', function() {
+    return { a: { b: true } };
+});
+obj.a.b = false;  // This modifies the cached object!
+
+var obj2 = cache.get('myObject', function() {
+    return { a: { b: true } };
+});
+// obj2.a.b is now false (not the expected true)
+----
+
+.Example: Solution with deep cloning
+[source,js]
+----
+// Solution: Deep clone when immutability is needed
+var obj = cache.get('myObject', function() {
+    return { a: { b: true } };
+});
+var clonedObj = JSON.parse(JSON.stringify(obj));
+clonedObj.a.b = false;  // Only modifies the clone
+
+var obj2 = cache.get('myObject', function() {
+    return { a: { b: true } };
+});
+// obj2.a.b is still true (cache is unaffected)
+----
+
 
 == API
 
@@ -77,6 +110,8 @@ var cache = cacheLib.newCache({
 
 This function will get (or populate) the named item from cache.
 
+NOTE: Cached objects are returned by reference. Modifying a retrieved object will affect the cached value. Deep clone the object if immutability is required.
+
 *Parameters*
 
 * `key` (_string_) Cache key to get.
@@ -95,6 +130,8 @@ var item = cache.get('my-key', function() {
 === `Cache.getIfPresent`
 
 This function will get the named item from cache if its set, otherwise it returns null.
+
+NOTE: Cached objects are returned by reference. Modifying a retrieved object will affect the cached value. Deep clone the object if immutability is required.
 
 *Parameters*
 

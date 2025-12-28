@@ -21,6 +21,10 @@ function Cache(native) {
 /**
  * Returns value for cache entry if exists, otherwise it's calculated and put into the cache.
  *
+ * **Important:** Objects are cached by reference. If you retrieve an object from the cache and modify it,
+ * those modifications will affect the cached object. If you need immutability, consider deep cloning
+ * the returned object (e.g., using `JSON.parse(JSON.stringify(obj))` for simple objects).
+ *
  * @param {string} key Cache key to use.
  * @param {function} callback Callback to a function that can calculate the cache value.
  * @returns {*} Cache value for key.
@@ -32,6 +36,10 @@ Cache.prototype.get = function (key, callback) {
 
 /**
  * Returns value for cache entry if exists, otherwise it returns null.
+ *
+ * **Important:** Objects are cached by reference. If you retrieve an object from the cache and modify it,
+ * those modifications will affect the cached object. If you need immutability, consider deep cloning
+ * the returned object (e.g., using `JSON.parse(JSON.stringify(obj))` for simple objects).
  *
  * @param {string} key Cache key to use.
  * @returns {*} Cache value for key.
