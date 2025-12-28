@@ -145,7 +145,7 @@ var item = cache.getIfPresent('my-key');
 
 This function will store the provided value for the named key in the cache, regardless if its previously set or not.
 
-NOTE: Cached objects are stored by reference. Modifying an object after storing it, or modifying an object retrieved from the cache, will affect the cached value. Deep clone the object if immutability is required.
+NOTE: Cached objects are stored and retrieved by reference. Modifying an object after storing it, or modifying an object retrieved from the cache, will affect the cached value. Deep clone the object if immutability is required.
 
 *Parameters*
 
