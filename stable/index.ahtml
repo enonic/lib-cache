@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.20">
+<meta name="generator" content="Asciidoctor 2.0.26">
 <title>Cache Library</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -116,7 +116,6 @@ h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title str
 :not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
 pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
 pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
-pre>code{display:block}
 pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
 em em{font-style:normal}
 strong strong{font-weight:400}
@@ -140,7 +139,7 @@ p a>code:hover{color:rgba(0,0,0,.9)}
 #content::before{content:none}
 #header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
 #header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
-#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header>h1:only-child{border-bottom:1px solid #dddddf;padding-bottom:8px}
 #header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
 #header .details span:first-child{margin-left:-.125em}
 #header .details span.email a{color:rgba(0,0,0,.85)}
@@ -162,6 +161,7 @@ p a>code:hover{color:rgba(0,0,0,.9)}
 #toctitle{color:#7a2518;font-size:1.2em}
 @media screen and (min-width:768px){#toctitle{font-size:1.375em}
 body.toc2{padding-left:15em;padding-right:0}
+body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
 #toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
 #toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
 #toc.toc2>ul{font-size:.9em;margin-bottom:0}
@@ -218,6 +218,7 @@ table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
 .literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
 .literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
 .listingblock>.content{position:relative}
+.listingblock pre>code{display:block}
 .listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
 .listingblock:hover code[data-lang]::before{display:block}
 .listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
@@ -327,7 +328,7 @@ a.image{text-decoration:none;display:inline-block}
 a.image object{pointer-events:none}
 sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
 sup.footnote a,sup.footnoteref a{text-decoration:none}
-sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+sup.footnote a:active,sup.footnoteref a:active,#footnotes .footnote a:first-of-type:active{text-decoration:underline}
 #footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
 #footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
 #footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
@@ -482,7 +483,7 @@ file:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var cacheLib = require('/lib/cache');</code></pre>
+<pre class="highlight"><code class="language-js" data-lang="js">const cacheLib = require('/lib/cache');</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -503,7 +504,7 @@ With the way XP triggers your controller, the new cache needs to be created <str
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var cache = cacheLib.newCache({
+<pre class="highlight"><code class="language-js" data-lang="js">const cache = cacheLib.newCache({
     size:   100,     <i class="conum" data-value="1"></i><b>(1)</b>
     expire: 3600     <i class="conum" data-value="2"></i><b>(2)</b>
 });</code></pre>
@@ -522,12 +523,11 @@ With the way XP triggers your controller, the new cache needs to be created <str
 </table>
 </div>
 <div class="paragraph">
-<p>From here on you can now use the cache functions on the cache. To get (or populate if not exists) items
-you can do like this:</p>
+<p>From here on you can now use the cache functions on the cache. To get (or populate if not exists) items you can do like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var item = cache.get('my-key', function() {     <i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="highlight"><code class="language-js" data-lang="js">let item = cache.get('my-key', function() {     <i class="conum" data-value="1"></i><b>(1)</b>
     return fetchSomethingHeavy();               <i class="conum" data-value="2"></i><b>(2)</b>
 });</code></pre>
 </div>
@@ -541,6 +541,18 @@ you can do like this:</p>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
 <td>Here you will do the actual population of the cache entry.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<strong>Object References and Immutability</strong> - Objects stored in the cache are returned by reference, not by value. This means that if you modify a retrieved object, those modifications could affect the cached object itself. Deep clone the returned object after retrieval if the value must be changed.
+</td>
 </tr>
 </table>
 </div>
@@ -582,7 +594,7 @@ you can do like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var cache = cacheLib.newCache({
+<pre class="highlight"><code class="language-js" data-lang="js">const cache = cacheLib.newCache({
     size:   100,
     expire: 3600
 });</code></pre>
@@ -612,7 +624,7 @@ you can do like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var item = cache.get('my-key', function() {
+<pre class="highlight"><code class="language-js" data-lang="js">let item = cache.get('my-key', function() {
     return fetchSomethingHeavy();
 });</code></pre>
 </div>
@@ -638,7 +650,7 @@ you can do like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var item = cache.getIfPresent('my-key');</code></pre>
+<pre class="highlight"><code class="language-js" data-lang="js">let item = cache.getIfPresent('my-key');</code></pre>
 </div>
 </div>
 </div>
@@ -646,6 +658,18 @@ you can do like this:</p>
 <h3 id="cache_put"><a class="link" href="#cache_put"><code>Cache.put</code></a></h3>
 <div class="paragraph">
 <p>This function will store the provided value for the named key in the cache, regardless if its previously set or not.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Cached objects are stored and retrieved by reference. Modifying an object after storing it, or modifying an object retrieved from the cache, could affect the cached value. Deep clone after retrieval if the value must be changed.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p><strong>Parameters</strong></p>
@@ -693,7 +717,7 @@ you can do like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">var size = cache.getSize();</code></pre>
+<pre class="highlight"><code class="language-js" data-lang="js">let size = cache.getSize();</code></pre>
 </div>
 </div>
 </div>
@@ -767,7 +791,7 @@ it will work by using <code>/lib/cache</code>, <code>/lib/xp/cache</code> and <c
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-04 14:21:56 UTC
+Last updated 2025-12-28 20:29:03 UTC
 </div>
 </div>
 </body>
