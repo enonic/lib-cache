@@ -110,8 +110,6 @@ var cache = cacheLib.newCache({
 
 This function will get (or populate) the named item from cache.
 
-NOTE: Cached objects are returned by reference. Modifying a retrieved object will affect the cached value. Deep clone the object if immutability is required.
-
 *Parameters*
 
 * `key` (_string_) Cache key to get.
@@ -131,8 +129,6 @@ var item = cache.get('my-key', function() {
 
 This function will get the named item from cache if its set, otherwise it returns null.
 
-NOTE: Cached objects are returned by reference. Modifying a retrieved object will affect the cached value. Deep clone the object if immutability is required.
-
 *Parameters*
 
 * `key` (_string_) Cache key to get.
@@ -148,6 +144,8 @@ var item = cache.getIfPresent('my-key');
 === `Cache.put`
 
 This function will store the provided value for the named key in the cache, regardless if its previously set or not.
+
+NOTE: Cached objects are stored by reference. Modifying an object after storing it, or modifying an object retrieved from the cache, will affect the cached value. Deep clone the object if immutability is required.
 
 *Parameters*
 

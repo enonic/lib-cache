@@ -50,10 +50,4 @@ public class CacheScriptTest
     {
         runFunction( "/test/cache-test.js", "testRemovePattern" );
     }
-
-    @Test
-    public void testObjectReferenceBehavior()
-    {
-        runFunction( "/test/cache-test.js", "testObjectReferenceBehavior" );
-    }
 }

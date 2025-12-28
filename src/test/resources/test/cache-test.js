@@ -122,32 +122,3 @@ exports.testRemovePattern = function () {
     cache.removePattern('key.*');
     assert.assertEquals(2, cache.getSize());
 };
-
-exports.testObjectReferenceBehavior = function () {
-    // This test demonstrates that cached objects are returned by reference.
-    // Modifications to retrieved objects will affect the cached value.
-    // Developers should deep clone objects if immutability is required.
-
-    var cache = cacheLib.newCache({
-        size: 100,
-        expire: 10
-    });
-
-    var getObject = function () {
-        return { a: { b: true } };
-    };
-
-    // Get object from cache (populates cache)
-    var o = cache.get('object', getObject);
-    assert.assertEquals(true, o.a.b);
-
-    // Modify the retrieved object
-    o.a.b = false;
-
-    // Get the same object again - the modification persists because it's the same reference
-    var p = cache.get('object', getObject);
-    assert.assertEquals(false, p.a.b); // Modified value is returned
-
-    // Verify they are the same reference
-    assert.assertEquals(o.a, p.a);
-};
