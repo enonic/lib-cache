@@ -47,7 +47,7 @@ var item = cache.get('my-key', function() {     // <1>
 <1> Get function will either get the item if exists, or call the function to populate the cache.
 <2> Here you will do the actual population of the cache entry.
 
-IMPORTANT: *Object References and Immutability* - Objects stored in the cache are returned by reference, not by value. This means that if you modify a retrieved object, those modifications will affect the cached object itself. If immutability is required, you must deep clone the returned object. For simple objects, you can use `JSON.parse(JSON.stringify(obj))`. For more complex objects with functions or circular references, consider using a dedicated deep cloning library.
+IMPORTANT: *Object References and Immutability* - Objects stored in the cache are returned by reference, not by value. This means that if you modify a retrieved object, those modifications could affect the cached object itself. It is best to deep clone the returned object after retrieval if the value must be changed. For simple objects, you can use `JSON.parse(JSON.stringify(obj))`. For more complex objects with functions or circular references, consider using a dedicated deep cloning library.
 
 .Example: Reference behavior
 [source,js]
@@ -67,7 +67,7 @@ var obj2 = cache.get('myObject', function() {
 .Example: Solution with deep cloning
 [source,js]
 ----
-// Solution: Deep clone when immutability is needed
+// Solution: Deep clone after retrieval if the value must be changed
 var obj = cache.get('myObject', function() {
     return { a: { b: true } };
 });
@@ -145,7 +145,7 @@ var item = cache.getIfPresent('my-key');
 
 This function will store the provided value for the named key in the cache, regardless if its previously set or not.
 
-NOTE: Cached objects are stored and retrieved by reference. Modifying an object after storing it, or modifying an object retrieved from the cache, will affect the cached value. Deep clone the object if immutability is required.
+NOTE: Cached objects are stored and retrieved by reference. Modifying an object after storing it, or modifying an object retrieved from the cache, could affect the cached value. It is best to deep clone after retrieval if the value must be changed.
 
 *Parameters*
 

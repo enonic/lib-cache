@@ -45,8 +45,8 @@ Cache.prototype.getIfPresent = function (key) {
  * Puts the value into the cache with the provided key
  *
  * **Important:** Objects are cached by reference. If you modify an object after storing it in the cache,
- * or modify an object retrieved from the cache, those modifications will affect the cached object.
- * If you need immutability, consider deep cloning the object before storing or after retrieving
+ * or modify an object retrieved from the cache, those modifications could affect the cached object.
+ * It is best to deep clone after retrieval if the value must be changed
  * (e.g., using `JSON.parse(JSON.stringify(obj))` for simple objects).
  *
  * @param {string} key Cache key to use.
