@@ -44,6 +44,10 @@ Cache.prototype.getIfPresent = function (key) {
 /**
  * Puts the value into the cache with the provided key
  *
+ * **Important:** Objects are cached by reference. If you modify an object after storing it in the cache,
+ * or modify an object retrieved from the cache, those modifications could affect the cached object.
+ * Deep clone after retrieval if the value must be changed.
+ *
  * @param {string} key Cache key to use.
  * @param {Object} value Value to store in the cache.
  */

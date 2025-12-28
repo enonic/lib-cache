@@ -17,7 +17,7 @@ To use this library in your JavaScript code, you first need to require it in you
 
 [source,js]
 ----
-var cacheLib = require('/lib/cache');
+const cacheLib = require('/lib/cache');
 ----
 
 Then you will need to create a new cache with some settings. You can create multiple caches in your
@@ -27,7 +27,7 @@ WARNING: With the way XP triggers your controller, the new cache needs to be cre
 
 [source,js]
 ----
-var cache = cacheLib.newCache({
+const cache = cacheLib.newCache({
     size:   100,     // <1>
     expire: 3600     // <2>
 });
@@ -35,17 +35,18 @@ var cache = cacheLib.newCache({
 <1> Maximum number of items in the cache before it will evict the oldest.
 <2> Number of seconds the items will be in the cache before it's evicted.
 
-From here on you can now use the cache functions on the cache. To get (or populate if not exists) items
-you can do like this:
+From here on you can now use the cache functions on the cache. To get (or populate if not exists) items you can do like this:
 
 [source,js]
 ----
-var item = cache.get('my-key', function() {     // <1>
+let item = cache.get('my-key', function() {     // <1>
     return fetchSomethingHeavy();               // <2>
 });
 ----
 <1> Get function will either get the item if exists, or call the function to populate the cache.
 <2> Here you will do the actual population of the cache entry.
+
+IMPORTANT: *Object References and Immutability* - Objects stored in the cache are returned by reference, not by value. This means that if you modify a retrieved object, those modifications could affect the cached object itself. Deep clone the returned object after retrieval if the value must be changed.
 
 
 == API
@@ -66,7 +67,7 @@ This will create a new cache instance.
 
 [source,js]
 ----
-var cache = cacheLib.newCache({
+const cache = cacheLib.newCache({
     size:   100,
     expire: 3600
 });
@@ -86,7 +87,7 @@ This function will get (or populate) the named item from cache.
 
 [source,js]
 ----
-var item = cache.get('my-key', function() {
+let item = cache.get('my-key', function() {
     return fetchSomethingHeavy();
 });
 ----
@@ -104,13 +105,15 @@ This function will get the named item from cache if its set, otherwise it return
 
 [source,js]
 ----
-var item = cache.getIfPresent('my-key');
+let item = cache.getIfPresent('my-key');
 ----
 
 
 === `Cache.put`
 
 This function will store the provided value for the named key in the cache, regardless if its previously set or not.
+
+NOTE: Cached objects are stored and retrieved by reference. Modifying an object after storing it, or modifying an object retrieved from the cache, could affect the cached value. Deep clone after retrieval if the value must be changed.
 
 *Parameters*
 
@@ -145,7 +148,7 @@ This will return the number of items currently in the cache.
 
 [source,js]
 ----
-var size = cache.getSize();
+let size = cache.getSize();
 ----
 
 
