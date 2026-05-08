@@ -3,7 +3,7 @@ plugins {
     id 'jacoco'
     id 'maven-publish'
     alias(libs.plugins.enonic.defaults)
-    alias(libs.plugins.enonic.xp.base)
+    id 'com.enonic.xp.base'
 }
 
 repositories {
@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly "com.enonic.xp:script-api:${xpVersion}"
+    compileOnly xplibs.api.script
     testImplementation "com.enonic.xp:testing:${xpVersion}"
 
     testImplementation platform(libs.junit.bom)
