@@ -4,7 +4,6 @@ junit = "5.14.1"
 mockito = "5.23.0"
 assertj = "3.27.7"
 enonicDefaults = "2.1.6"
-xpBase = "3.6.2"
 
 [libraries]
 
@@ -20,4 +19,3 @@ assertj-core = { module = "org.assertj:assertj-core", version.ref = "assertj" }
 
 [plugins]
 enonic-defaults = { id = "com.enonic.defaults", version.ref = "enonicDefaults" }
-enonic-xp-base = { id = "com.enonic.xp.base", version.ref = "xpBase" }
