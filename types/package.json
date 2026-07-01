@@ -1,0 +1,32 @@
+{
+  "name": "@enonic-types/lib-cache",
+  "version": "0.0.0",
+  "description": "Type definitions for the Enonic XP Cache library",
+  "types": "index.d.ts",
+  "files": [
+    "*"
+  ],
+  "keywords": [
+    "enonic",
+    "enonic-xp",
+    "lib-cache",
+    "cache",
+    "types",
+    "typescript"
+  ],
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/enonic/lib-cache#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enonic/lib-cache.git"
+  },
+  "bugs": {
+    "url": "https://github.com/enonic/lib-cache/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@enonic-types/core": "^8.0.0"
+  }
+}
