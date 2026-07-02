@@ -1,5 +1,7 @@
 = Cache Library
 
+NOTE: Versions 3.x target XP 8+.
+
 This library is used for basic caching of resources in memory. It will automatically evict old
 entries when the cache is full. To start using this library, add the following dependency to your `build.gradle`
 file:
@@ -7,7 +9,7 @@ file:
 [source,groovy]
 ----
 dependencies {
-  include 'com.enonic.lib:lib-cache:2.2.0'
+  include "com.enonic.lib:lib-cache:${libVersion}"
 }
 ----
 
@@ -184,13 +186,3 @@ If the regex pattern does not match with any existing key, no changes are made.
 ----
 cache.removePattern('product.*');
 ----
-
-
-== Compatibility
-
-This library is also a drop-in replacement for the library in Enonic XP released before 6.11.0. It can be used directly since
-it will work by using `/lib/cache`, `/lib/xp/cache` and `/site/lib/xp/cache`.
-
-The `remove` and `removePattern` functions are only available since version *1.1.0*
-
-The `getIfPresent` and `put` functions are only available since version *2.2.0*
