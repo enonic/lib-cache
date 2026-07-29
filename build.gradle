@@ -13,7 +13,9 @@ repositories {
 
 dependencies {
     compileOnly xplibs.api.script
+    compileOnly "com.enonic.xp:core-api:${xpVersion}"
     testImplementation "com.enonic.xp:testing:${xpVersion}"
+    testImplementation libs.osgi.core
 
     testImplementation platform(libs.junit.bom)
     testImplementation libs.junit.jupiter
@@ -23,6 +25,8 @@ dependencies {
     testImplementation libs.mockito.core
     testImplementation libs.mockito.jupiter
     testImplementation libs.assertj.core
+
+    testRuntimeOnly libs.graalvm.js
 }
 
 jacocoTestReport {
@@ -41,3 +45,15 @@ artifacts {
 test {
     useJUnitPlatform()
 }
+
+def testGraalJs = tasks.register('testGraalJs', Test) {
+    group = 'verification'
+    description = 'Runs tests with the GraalJS script engine.'
+    useJUnitPlatform()
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+    systemProperty 'xp.script-engine', 'GraalJS'
+    shouldRunAfter test
+}
+
+check.dependsOn testGraalJs
