@@ -37,6 +37,40 @@ const cache = cacheLib.newCache({
 <1> Maximum number of items in the cache before it will evict the oldest.
 <2> Number of seconds the items will be in the cache before it's evicted.
 
+== Unnamed and named caches
+
+There are two kinds of cache, and giving a cache a `name` changes how its values are stored.
+
+*Unnamed* caches (no `name` option) live *per script context*. On a pooled engine the same `newCache`
+call at module level produces one cache in each context, so an entry stored in one context is not
+seen from another, `size` bounds *each* context's cache and `getSize()` reports only the calling
+context's entries. Values are cached *by reference* at no copy cost and any value can be stored. This
+is the original behaviour and is unchanged.
+
+*Named* caches (`name` option set) live *per application* and are shared by every context. The same
+name always returns the same cache; different names are different caches.
+
+[source,js]
+----
+const shared = cacheLib.newCache({
+    name:   'my-cache',   // <1>
+    size:   100,
+    expire: 3600
+});
+----
+<1> Makes the cache application-wide and shared across all contexts.
+
+IMPORTANT: Because a value in a named cache may outlive the context that produced it, values are
+stored as *data*: each `put` copies the value in and each `get`/`getIfPresent` copies it out. Mutating
+a retrieved value therefore never affects the cached entry, and functions, host objects and cyclic
+structures throw at `put` instead of being cached. Adding a `name` to a previously unnamed cache thus
+switches it from by-reference to copy semantics and may start throwing on a value that cached fine
+before.
+
+A named cache is cleared when its application is stopped, uninstalled or reconfigured. It is *not*
+cleared on a dev-mode script reload, and if `expire` is not set its entries live until one of those
+events occurs.
+
 From here on you can now use the cache functions on the cache. To get (or populate if not exists) items you can do like this:
 
 [source,js]
@@ -48,7 +82,7 @@ let item = cache.get('my-key', function() {     // <1>
 <1> Get function will either get the item if exists, or call the function to populate the cache.
 <2> Here you will do the actual population of the cache entry.
 
-IMPORTANT: *Object References and Immutability* - Objects stored in the cache are returned by reference, not by value. This means that if you modify a retrieved object, those modifications could affect the cached object itself. Deep clone the returned object after retrieval if the value must be changed.
+IMPORTANT: *Object References and Immutability* - In an *unnamed* cache, objects are returned by reference, not by value. This means that if you modify a retrieved object, those modifications could affect the cached object itself. Deep clone the returned object after retrieval if the value must be changed. A *named* cache instead stores a copy of the value, so mutating a retrieved object never affects the cached entry (see <<Unnamed and named caches>>).
 
 
 == API
@@ -62,6 +96,7 @@ This will create a new cache instance.
 *Parameters*
 
 * `config` (_object_) Configuration for the cache.
+** `name` (_string_) If set, creates an application-wide cache shared by all contexts under this name. See <<Unnamed and named caches>> — naming a cache changes its value semantics.
 ** `size` (_number_) Size of the cache (in number of items).
 ** `expire` (_number_)  If set, each item will be automatically purged from the cache after a set period, in seconds, has elapsed since the item's initial creation, or the most recent update of its value.
 
@@ -115,7 +150,7 @@ let item = cache.getIfPresent('my-key');
 
 This function will store the provided value for the named key in the cache, regardless if its previously set or not.
 
-NOTE: Cached objects are stored and retrieved by reference. Modifying an object after storing it, or modifying an object retrieved from the cache, could affect the cached value. Deep clone after retrieval if the value must be changed.
+NOTE: In an *unnamed* cache, objects are stored and retrieved by reference. Modifying an object after storing it, or modifying an object retrieved from the cache, could affect the cached value. Deep clone after retrieval if the value must be changed. In a *named* cache the value is copied as data on `put` (and again on `get`), so functions, host objects and cyclic structures throw here instead of being cached. See <<Unnamed and named caches>>.
 
 *Parameters*
 

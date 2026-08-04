@@ -13,7 +13,9 @@ repositories {
 
 dependencies {
     compileOnly xplibs.api.script
+    compileOnly "com.enonic.xp:core-api:${xpVersion}"
     testImplementation "com.enonic.xp:testing:${xpVersion}"
+    testImplementation libs.osgi.core
 
     testImplementation platform(libs.junit.bom)
     testImplementation libs.junit.jupiter
@@ -40,4 +42,8 @@ artifacts {
 
 test {
     useJUnitPlatform()
+}
+
+xp {
+    scriptEngines = ['Nashorn', 'GraalJS']
 }
