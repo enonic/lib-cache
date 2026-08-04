@@ -25,8 +25,6 @@ dependencies {
     testImplementation libs.mockito.core
     testImplementation libs.mockito.jupiter
     testImplementation libs.assertj.core
-
-    testRuntimeOnly libs.graalvm.js
 }
 
 jacocoTestReport {
@@ -46,14 +44,6 @@ test {
     useJUnitPlatform()
 }
 
-def testGraalJs = tasks.register('testGraalJs', Test) {
-    group = 'verification'
-    description = 'Runs tests with the GraalJS script engine.'
-    useJUnitPlatform()
-    testClassesDirs = sourceSets.test.output.classesDirs
-    classpath = sourceSets.test.runtimeClasspath
-    systemProperty 'xp.script-engine', 'GraalJS'
-    shouldRunAfter test
+xp {
+    scriptEngines = ['Nashorn', 'GraalJS']
 }
-
-check.dependsOn testGraalJs

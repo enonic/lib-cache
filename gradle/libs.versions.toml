@@ -4,12 +4,10 @@ junit = "6.1.2"
 mockito = "5.23.0"
 assertj = "3.27.7"
 enonicDefaults = "2.1.7"
-graalvm = "25.0.3"
 osgi = "8.0.0"
 
 [libraries]
 
-graalvm-js = { module = "org.graalvm.polyglot:js", version.ref = "graalvm" }
 osgi-core = { module = "org.osgi:osgi.core", version.ref = "osgi" }
 
 junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }
